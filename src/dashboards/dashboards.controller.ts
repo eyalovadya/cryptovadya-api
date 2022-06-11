@@ -13,26 +13,31 @@ export class DashboardsController {
 
     @Get()
     findAll(@Req() request): Promise<DashboardDto[]> {
-        return this.dashboardsService.findAll(request.user.id);
+        const userId = request.user.id;
+        return this.dashboardsService.findAll(userId);
     }
 
     @Get(':id')
     findOne(@Param('id', new ParseIntPipe()) id: number, @Req() request): Promise<DashboardDto> {
-        return this.dashboardsService.findOne(id, request.user.id);
+        const userId = request.user.id;
+        return this.dashboardsService.findOne(id, userId);
     }
 
     @Post()
     create(@Body() createDashboardDto: CreateDashboardDto, @Req() request): Promise<DashboardEntity> {
-        return this.dashboardsService.create(request.user.id, createDashboardDto);
+        const userId = request.user.id;
+        return this.dashboardsService.create(userId, createDashboardDto);
     }
 
     @Put(':id')
     update(@Param('id', new ParseIntPipe()) id: number, @Req() request, @Body() updateDashboardDto: UpdateDashboardDto): Promise<DashboardEntity> {
-        return this.dashboardsService.update(id, request.user.id, updateDashboardDto);
+        const userId = request.user.id;
+        return this.dashboardsService.update(id, userId, updateDashboardDto);
     }
 
     @Delete(':id')
     delete(@Param('id', new ParseIntPipe()) id: number, @Req() request): Promise<DashboardEntity> {
-        return this.dashboardsService.delete(id, request.user.id);
+        const userId = request.user.id;
+        return this.dashboardsService.delete(id, userId);
     }
 }

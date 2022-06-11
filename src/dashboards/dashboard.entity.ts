@@ -1,3 +1,4 @@
+import { Widget } from './../widgets/widget.entity';
 import {
     Table,
     PrimaryKey,
@@ -11,6 +12,7 @@ import {
     UpdatedAt,
     DeletedAt,
     BelongsTo,
+    HasMany,
 } from 'sequelize-typescript';
 import { User } from './../users/user.entity';
 
@@ -49,4 +51,7 @@ export class Dashboard extends Model<Dashboard> {
 
     @BelongsTo(() => User)
     user: User;
+
+    @HasMany(() => Widget)
+    widgets: Widget[];
 }

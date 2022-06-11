@@ -1,3 +1,4 @@
+import { WidgetDto } from '../../widgets/dto/widget.dto';
 import { Dashboard } from './../dashboard.entity';
 
 export class DashboardDto {
@@ -7,6 +8,8 @@ export class DashboardDto {
 
     readonly title: string;
 
+    readonly widgets: WidgetDto[];
+
     readonly createdAt: Date;
 
     readonly updatedAt: Date;
@@ -14,6 +17,7 @@ export class DashboardDto {
     constructor(dashboard: Dashboard) {
         this.id = dashboard.id;
         this.title = dashboard.title;
+        this.widgets = dashboard.widgets.map((widget) => new WidgetDto(widget));
         this.createdAt = dashboard.createdAt;
         this.updatedAt = dashboard.updatedAt;
     }
