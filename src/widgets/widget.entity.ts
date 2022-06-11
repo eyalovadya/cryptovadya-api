@@ -1,3 +1,4 @@
+import { CreateWidgetDataDto } from './dto/create-widget-data.dto';
 import {
     Table,
     PrimaryKey,
@@ -13,7 +14,6 @@ import {
 } from 'sequelize-typescript';
 import { WidgetType } from '../shared/types/widget-types.type';
 import { Dashboard } from './../dashboards/dashboard.entity';
-import { WidgetData } from './types/widget-data.type';
 
 @Table({
     tableName: 'widgets',
@@ -33,7 +33,7 @@ export class Widget<T extends WidgetType = WidgetType> extends Model<Widget<T>> 
     type: T;
 
     @Column(DataType.JSONB)
-    data: WidgetData<T>;
+    data: CreateWidgetDataDto<T>;
 
     @CreatedAt
     createdAt: Date;

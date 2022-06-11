@@ -1,12 +1,16 @@
 import { IsString } from 'class-validator';
-export class StatCardData {
+export class CreateStatCardDataDto {
+    @IsString()
+    baseCurrencyId: string;
+
     @IsString()
     baseCurrency: string;
 
     @IsString()
     quoteCurrency: string;
 
-    constructor(data: StatCardData) {
+    constructor(data: CreateStatCardDataDto) {
+        this.baseCurrencyId = data.baseCurrencyId;
         this.baseCurrency = data.baseCurrency;
         this.quoteCurrency = data.quoteCurrency;
     }
