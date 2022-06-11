@@ -1,7 +1,7 @@
-import { WidgetData } from './../types/widget-data.type';
 import { WidgetType, WIDGET_TYPES } from '../../shared/types/widget-types.type';
-import { Length, IsString, IsEnum, Validate } from 'class-validator';
+import { IsEnum, Validate } from 'class-validator';
 import { WidgetDataIntegrity } from '../validation/widget-data.validation';
+import { CreateWidgetDataDto } from './create-widget-data.dto';
 
 export class CreateWidgetDto<T extends WidgetType = WidgetType> {
     readonly dashboardId: number;
@@ -10,5 +10,5 @@ export class CreateWidgetDto<T extends WidgetType = WidgetType> {
     readonly type: T;
 
     @Validate(WidgetDataIntegrity)
-    readonly data: WidgetData<T>;
+    readonly data: CreateWidgetDataDto<T>;
 }

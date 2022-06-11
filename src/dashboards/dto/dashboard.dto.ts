@@ -14,10 +14,10 @@ export class DashboardDto {
 
     readonly updatedAt: Date;
 
-    constructor(dashboard: Dashboard) {
+    constructor(dashboard: Dashboard, dashboardWidgets?: WidgetDto[]) {
         this.id = dashboard.id;
         this.title = dashboard.title;
-        this.widgets = dashboard.widgets.map((widget) => new WidgetDto(widget));
+        this.widgets = dashboardWidgets || dashboard.widgets.map((widget) => new WidgetDto(widget));
         this.createdAt = dashboard.createdAt;
         this.updatedAt = dashboard.updatedAt;
     }

@@ -66,12 +66,12 @@ export class UsersService {
 
         const user = await this.getUserByEmail(email);
         if (!user) {
-            throw new HttpException('Invalid email or password.', HttpStatus.BAD_REQUEST);
+            throw new HttpException('Invalid email or password', HttpStatus.BAD_REQUEST);
         }
 
         const isMatch = await compare(password, user.password);
         if (!isMatch) {
-            throw new HttpException('Invalid email or password.', HttpStatus.BAD_REQUEST);
+            throw new HttpException('Invalid email or password', HttpStatus.BAD_REQUEST);
         }
 
         const token = await this.signToken(user);

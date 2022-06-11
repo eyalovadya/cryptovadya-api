@@ -1,18 +1,18 @@
-import { StatCardData } from './../types/stat-card.type';
+import { CreateStatCardDataDto } from './../dto/widget-types/stat-card/create-stat-card-data.dto';
 import { CreateWidgetDto } from './../dto/create-widget.dto';
-import { WidgetData } from './../types/widget-data.type';
 import { ValidatorConstraint, ValidatorConstraintInterface, ValidationArguments, validateSync } from 'class-validator';
+import { CreateWidgetDataDto } from '../dto/create-widget-data.dto';
 
 @ValidatorConstraint({ name: 'customText', async: false })
 export class WidgetDataIntegrity implements ValidatorConstraintInterface {
-    validate(data: WidgetData, args: ValidationArguments) {
+    validate(data: CreateWidgetDataDto, args: ValidationArguments) {
         try {
             if (!data) return false;
             const { type } = args.object as CreateWidgetDto;
 
             switch (type) {
                 case 'STAT_CARD': {
-                    const statCardData = new StatCardData(data);
+                    const statCardData = new CreateStatCardDataDto(data);
                     const errors = validateSync(statCardData, { forbidNonWhitelisted: true });
                     if (errors.length) return false;
                 }
