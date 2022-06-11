@@ -48,5 +48,5 @@ export class User extends Model<User> {
     deletedAt: Date;
 
     @HasMany(() => Dashboard)
-    dashboard: Dashboard[];
+    dashboards: Dashboard[];
 }

@@ -1,3 +1,4 @@
+import { Widget } from './../widgets/widget.entity';
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
 import { User } from './../users/user.entity';
 import { CreateDashboardDto } from './dto/create-dashboard.dto';
@@ -15,7 +16,7 @@ export class DashboardsService {
     }
 
     async findOne(id: number, userId: string) {
-        const dashboard = await this.dashboardsRepository.findOne<Dashboard>({ where: { id, userId } });
+        const dashboard = await this.dashboardsRepository.findOne<Dashboard>({ where: { id, userId }, include: [Widget] });
         if (!dashboard) {
             throw new HttpException('No dashboard found', HttpStatus.NOT_FOUND);
         }
@@ -41,7 +42,7 @@ export class DashboardsService {
         return dashboard;
     }
 
-    private async getUserDashboard(id: number, userId: string) {
+    async getUserDashboard(id: number, userId: string) {
         const dashboard = await this.dashboardsRepository.findByPk<Dashboard>(id);
         if (!dashboard) {
             throw new HttpException('No dashboard found', HttpStatus.NOT_FOUND);
