@@ -8,9 +8,9 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
-    "db:migrate": "ts-node node_modules/.bin/sequelize db:migrate",
-    "db:drop": "ts-node node_modules/.bin/sequelize db:drop",
-    "db:create": "ts-node node_modules/.bin/sequelize db:create",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:drop": "sequelize-cli db:drop",
+    "db:create": "sequelize-cli db:create",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
     "start:dev": "nest start --watch",

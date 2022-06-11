@@ -9,8 +9,10 @@ export class CreateUserDto {
     readonly password: string;
 
     @IsString()
+    @MinLength(2)
     readonly firstName: string;
 
     @IsString()
+    @MinLength(2)
     readonly lastName: string;
 }

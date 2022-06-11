@@ -1,4 +1,5 @@
-import { Table, Column, Model, Unique, IsEmail, DataType, CreatedAt, UpdatedAt, DeletedAt, HasMany } from 'sequelize-typescript';
+import { Dashboard } from './../dashboards/dashboard.entity';
+import { Table, Column, Model, Unique, IsEmail, DataType, CreatedAt, UpdatedAt, DeletedAt, HasMany, Length } from 'sequelize-typescript';
 
 @Table({
     tableName: 'users',
@@ -20,9 +21,17 @@ export class User extends Model<User> {
     @Column
     password: string;
 
+    @Length({
+        min: 2,
+        msg: `The length of user first name can't be shorter than 2`,
+    })
     @Column
     firstName: string;
 
+    @Length({
+        min: 2,
+        msg: `The length of user first name can't be shorter than 2`,
+    })
     @Column
     lastName: string;
 
@@ -37,4 +46,7 @@ export class User extends Model<User> {
     @DeletedAt
     @Column
     deletedAt: Date;
+
+    @HasMany(() => Dashboard)
+    dashboard: Dashboard[];
 }
