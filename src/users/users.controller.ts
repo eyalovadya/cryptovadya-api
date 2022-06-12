@@ -1,17 +1,15 @@
-import { ConfigService } from '@nestjs/config';
 import { UserLoginRequestDto } from './dto/user-login-request.dto';
 import { Controller, Get, Post, Body, HttpCode, Delete, Req, UseGuards, Put, Res } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UsersService } from './users.service';
 import { UserDto } from './dto/user.dto';
-import { UserLoginResponseDto } from './dto/user-login-response.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { JwtAuthGuard } from './auth/jwt-auth.guard';
 import { Response } from 'express';
 
 @Controller('users')
 export class UsersController {
-    constructor(private readonly usersService: UsersService, private readonly configService: ConfigService) {}
+    constructor(private readonly usersService: UsersService) {}
 
     @Post('register')
     async register(@Body() createUserDto: CreateUserDto, @Res({ passthrough: true }) res: Response): Promise<UserDto> {
@@ -68,7 +66,6 @@ export class UsersController {
         res.cookie('token', token, {
             httpOnly: true,
             expires: new Date(2100, 1, 1),
-            domain: this.configService.get<string>('cryptovadyaUiUrl'),
             sameSite: 'none',
         });
     }
