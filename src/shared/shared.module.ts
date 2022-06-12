@@ -5,7 +5,7 @@ import { CoinGeckoService } from './services/coin-gecko.service';
 
 @Global()
 @Module({
-    imports: [ConfigService, CoinGeckoService, HttpModule],
+    imports: [HttpModule],
     providers: [ConfigService, CoinGeckoService, HttpModule],
     exports: [ConfigService, CoinGeckoService, HttpModule],
 })

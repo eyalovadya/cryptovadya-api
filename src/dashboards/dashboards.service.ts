@@ -51,7 +51,10 @@ export class DashboardsService {
         const dashboard = new Dashboard();
         dashboard.userId = userId;
         dashboard.title = createDashboardDto.title;
-        return dashboard.save();
+        await dashboard.save();
+
+        const createdDashboard = new DashboardDto(dashboard, []);
+        return createdDashboard;
     }
 
     async update(id: number, userId: string, updateDashboardDto: UpdateDashboardDto) {
