@@ -8,14 +8,14 @@ import { UserLoginResponseDto } from './dto/user-login-response.dto';
 import { JwtPayload } from './auth/jwt-payload.model';
 import { sign } from 'jsonwebtoken';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { ConfigService } from './../shared/config/config.service';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class UsersService {
-    private readonly jwtPrivateKey: string;
+    private readonly jwtSecret: string;
 
     constructor(@Inject('UsersRepository') private readonly usersRepository: typeof User, private readonly configService: ConfigService) {
-        this.jwtPrivateKey = this.configService.jwtConfig.privateKey;
+        this.jwtSecret = this.configService.get<string>('jwtSecret');
     }
 
     async findAll() {
@@ -106,7 +106,7 @@ export class UsersService {
             email: user.email,
         };
 
-        return sign(payload, this.jwtPrivateKey, {
+        return sign(payload, this.jwtSecret, {
             // expiresIn: '72h',
         });
     }

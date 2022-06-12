@@ -3,8 +3,8 @@ import { Strategy, ExtractJwt, VerifiedCallback } from 'passport-jwt';
 import { JwtPayload } from './jwt-payload.model';
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { UsersService } from '../users.service';
-import { ConfigService } from '../../shared/config/config.service';
 import { Request } from 'express';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -19,7 +19,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
                     return token;
                 },
             ]),
-            secretOrKey: configService.jwtConfig.privateKey,
+            secretOrKey: configService.get<string>('jwtSecret'),
         });
     }
 
