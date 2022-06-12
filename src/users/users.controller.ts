@@ -35,6 +35,7 @@ export class UsersController {
     @HttpCode(200)
     logout(@Res({ passthrough: true }) res: Response) {
         res.clearCookie('token', { httpOnly: true });
+        return { message: 'success' };
     }
 
     @Get()

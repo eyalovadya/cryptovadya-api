@@ -24,7 +24,7 @@ export class DashboardsController {
     }
 
     @Post()
-    create(@Body() createDashboardDto: CreateDashboardDto, @Req() request): Promise<DashboardEntity> {
+    create(@Body() createDashboardDto: CreateDashboardDto, @Req() request): Promise<DashboardDto> {
         const userId = request.user.id;
         return this.dashboardsService.create(userId, createDashboardDto);
     }
