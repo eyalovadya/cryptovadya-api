@@ -1,7 +1,6 @@
 import { CoinGeckoService } from './../shared/services/coin-gecko.service';
 import { Widget } from './../widgets/widget.entity';
 import { Injectable, Inject, HttpException, HttpStatus } from '@nestjs/common';
-import { User } from './../users/user.entity';
 import { CreateDashboardDto } from './dto/create-dashboard.dto';
 import { Dashboard } from './dashboard.entity';
 import { DashboardDto } from './dto/dashboard.dto';
@@ -10,6 +9,7 @@ import { WidgetDto } from '../widgets/dto/widget.dto';
 
 @Injectable()
 export class DashboardsService {
+    private readonly DAY_DIFF_FIELD_SUFFIX = '_24h_change';
     constructor(
         @Inject('DashboardsRepository') private readonly dashboardsRepository: typeof Dashboard,
         private readonly coinGeckoService: CoinGeckoService,
@@ -39,7 +39,7 @@ export class DashboardsService {
             const { quoteCurrency, baseCurrencyId } = widget.data;
             const widgetToAdd = new WidgetDto(widget, {
                 data: simplePriceResponse[baseCurrencyId]?.[quoteCurrency.toLowerCase()] || 0,
-                dayDiffPrecent: simplePriceResponse[baseCurrencyId]?.[`${quoteCurrency.toLowerCase()}_24h_change`] || 0,
+                dayDiffPrecent: simplePriceResponse[baseCurrencyId]?.[`${quoteCurrency.toLowerCase()}${this.DAY_DIFF_FIELD_SUFFIX}`] || 0,
             });
             widgetsWithData.push(widgetToAdd);
         }
