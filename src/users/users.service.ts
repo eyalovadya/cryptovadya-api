@@ -26,7 +26,8 @@ export class UsersService {
     async getUser(id: string) {
         const user = await this.usersRepository.findByPk<User>(id);
         if (!user) {
-            throw new HttpException('User with given id not found', HttpStatus.NOT_FOUND);
+            const message = 'User with given id not found';
+            throw new HttpException(message, HttpStatus.NOT_FOUND);
         }
         return new UserDto(user);
     }
@@ -53,7 +54,8 @@ export class UsersService {
             return new UserLoginResponseDto(userData, token);
         } catch (err) {
             if (err.original.constraint === 'users_email_key') {
-                throw new HttpException(`User with email '${err.errors[0].value}' already exists`, HttpStatus.CONFLICT);
+                const message = `User with email '${err.errors[0].value}' already exists`;
+                throw new HttpException(message, HttpStatus.CONFLICT);
             }
 
             throw new HttpException(err, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -61,17 +63,20 @@ export class UsersService {
     }
 
     async login(userLoginRequestDto: UserLoginRequestDto) {
-        const email = userLoginRequestDto.email;
+        const email = userLoginRequestDto.email.trim().toLowerCase();
         const password = userLoginRequestDto.password;
 
+        const errorMessage = 'Invalid email or password';
+
         const user = await this.getUserByEmail(email);
+
         if (!user) {
-            throw new HttpException('Invalid email or password', HttpStatus.BAD_REQUEST);
+            throw new HttpException(errorMessage, HttpStatus.BAD_REQUEST);
         }
 
         const isMatch = await compare(password, user.password);
         if (!isMatch) {
-            throw new HttpException('Invalid email or password', HttpStatus.BAD_REQUEST);
+            throw new HttpException(errorMessage, HttpStatus.BAD_REQUEST);
         }
 
         const token = await this.signToken(user);
@@ -81,7 +86,7 @@ export class UsersService {
     async update(id: string, updateUserDto: UpdateUserDto) {
         const user = await this.usersRepository.findByPk<User>(id);
         if (!user) {
-            throw new HttpException('User not found.', HttpStatus.NOT_FOUND);
+            throw new HttpException('User not found', HttpStatus.NOT_FOUND);
         }
 
         user.firstName = updateUserDto.firstName || user.firstName;

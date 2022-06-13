@@ -66,8 +66,6 @@ export class UsersController {
         res.cookie('token', token, {
             httpOnly: true,
             expires: new Date(2100, 1, 1),
-            secure: true,
-            sameSite: 'none',
         });
     }
 }
