@@ -1,6 +1,6 @@
 ## CryptOvadya API
 
-App Link: (cryptovadya.com)[https://www.cryptovadya.com/]
+App Link: [cryptovadya.com](https://www.cryptovadya.com/)
 
 ## Installation
 
