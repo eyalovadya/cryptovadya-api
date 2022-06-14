@@ -73,7 +73,7 @@ type StatCardData = {
 ```typescript
 type WidgetData<T extends WidgetType = WidgetType> = T extends 'STAT_CARD' ? StatCardData : any;
 ```
-To add new data type extend to ternary expression. 
+To add new data type extend the ternary expression. 
 For example: 
 ```typescript
 type WidgetData<T extends WidgetType = WidgetType> = T extends 'STAT_CARD' ? StatCardData : 'NEW_TYPE' ? NewTypeData : any;
