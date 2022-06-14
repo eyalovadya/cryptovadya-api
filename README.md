@@ -39,7 +39,7 @@ Then, in the project root directory:
 1. Run `npm install` to get the npm dependencies
 2. Create .env file and add the [environment variables](#environment-variables)
 3. Run `npm start` (without live reload) or `npm run start:dev`(with live reload) to run the app in the development mode 
-4. User `npm run db:migrate` to run database migrations, see [sequelize-cli](https://sequelize.org/docs/v6/other-topics/migrations/) to learn how to manage migrations 
+4. Use `npm run db:migrate` to run database migrations, see [sequelize-cli](https://sequelize.org/docs/v6/other-topics/migrations/) to learn how to manage migrations 
 
 ## Main Entities
 
