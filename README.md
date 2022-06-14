@@ -57,7 +57,7 @@ const WIDGET_TYPES = ['STAT_CARD'] as const;
 type WidgetType = typeof WIDGET_TYPES[number]; // compiles to - type WidgetType = 'STAT_CARD'
 ```
 If you would like to add more widget types, just add them to the `WIDGET_TYPES` array. \
-For each widget type you need to create the corresponding `WidgetData` type (e.g. `StatCardData`) and add UI component to represent the data in [here](https://github.com/eyalovadya/cryptovadya-ui/blob/master/src/components/pages/singleDashboard/components/dashboardWidget/DashboardWidget.tsx).
+For each widget type you need to create the corresponding `WidgetData` type (e.g. `StatCardData`).
 
 **StatCardData Example:**
 ```typescript
